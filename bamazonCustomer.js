@@ -11,9 +11,18 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err){
     if (err) throw err;
-    start();
+    display();
 });
 
-function start(){
-    
+function display(){
+    connection.query("SELECT * FROM products", function(err, results) {
+        for (var i = 0; i < results.length; i++) {
+          console.log("Product ID: " + results[i].item_id + "\n" +  
+          "Product Name: " + results[i].product_name + "\n" + "Department Name: " + 
+          results[i].department_name + "\n" + "Unit Price: $" + results[i].price +
+        "\n" + "Current Inventory: " + results[i].stock_quantity + "\n" + "-----------------------");
+        }
+    connection.end();
+    });
+
 }
