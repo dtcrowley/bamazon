@@ -71,6 +71,14 @@ function purchaseItem(){
             }
             else {
                 console.log("New inventory levels after your purchase:\n" + newInventory + "\n");
+                connection.query("UPDATE products SET stock_quantity = ? WHERE item_id = ?",
+            [
+                newInventory, answer.itemID
+            ],
+            function(err, results){
+                console.log(results);
+            }
+        );
             }
         })
     })
