@@ -54,14 +54,14 @@ function purchaseItem(){
                 }
             }
         } 
-    ]).then(function(answer){
+    ]).then(function(answer,results){
         var chosenItem = answer.itemID;
         // console.log(chosenItem);
         var chosenQuantity = answer.quantity;
         // console.log(chosenQuantity);
         connection.query("SELECT * FROM products WHERE?", [{item_id: answer.itemID}], function(err, results){
             if (err) throw err;
-
+            var itemPrice = results[0].price;
             var originalInventory = results[0].stock_quantity;
             var newInventory = originalInventory - answer.quantity;
                 console.log("\nInventory level prior to your purchase:\n" + originalInventory + "\n");
@@ -71,15 +71,10 @@ function purchaseItem(){
             }
             else {
                 console.log("New inventory levels after your purchase:\n" + newInventory + "\n");
-                connection.query("UPDATE products SET stock_quantity = ? WHERE item_id = ?",
-            [
-                newInventory, answer.itemID
-            ],
-            function(err, results){
-                console.log(results);
+                console.log("The total price of your purchase is: \n$" + answer.quantity*itemPrice);
+                connection.query("UPDATE products SET stock_quantity = ? WHERE item_id = ?", [newInventory, answer.itemID],);
             }
-        );
-            }
+            connection.end();
         })
     })
 }

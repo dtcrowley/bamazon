@@ -1,7 +1,9 @@
 # bamazon
 
-Bamazon is a real-time database using MySQL, Node.js and JavaScript to keep a detailed inventory and account record for hypothetical retail giant, Bamazon.
+Bamazon is a database/app using MySQL, Node.js and JavaScript to keep a detailed inventory and account record for hypothetical retail giant, Bamazon.
 
-The Bamazon database will display product names, their departments, price and the current quantity for easy inventoy analysis and basic bookkeeping. 
+The Bamazon app will house product names, their departments, price and current quantity for easy inventory analysis in the MySQL database, and will display that data to the user via Node.js, prompting a purchase inquiry. The user will then select the item they would like to purchase and the desired quantity.
 
-Driven by JavaScript, channeled by Node and stored by MySQL, Bamazon is a very useful and convenient tool for this ever so creatively named, fake, totally-not-a-rip-off-of-any-other-major-corporation, company.
+If said quantity exceeds the item's current inventory, the purchase will be rejected and the user will be forced to restart the purchase process.
+
+Once the user places an order successfully, new inventory will be displayed, along with the total cost of the order. After the order is completed, the corresponding MySQL database will be updated to reflect the purchased product's new inventory.
