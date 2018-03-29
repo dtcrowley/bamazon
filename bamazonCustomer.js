@@ -23,8 +23,7 @@ function display(){
         "\n" + "Current Inventory: " + results[i].stock_quantity + "\n" + "-----------------------");
         }
     purchaseItem();   
-    });
-    
+    });   
 }
 
 function purchaseItem(){
@@ -32,7 +31,7 @@ function purchaseItem(){
         {
             type: "input",
             name: "itemID",
-            message: "What is the item ID of the product you would like to purchase?",
+            message: "What is the item ID of the product you would like to purchase?\n",
             validate: function(value) {
                 if (!isNaN(value) && value < 11) {
                     return true;
@@ -45,7 +44,7 @@ function purchaseItem(){
         {
             type: "number",
             name: "quantity",
-            message: "How many of this item would you like to purchase?",
+            message: "How many of this item would you like to purchase?\n",
             validate: function(value) {
                 if(!isNaN(value)){
                     return true;
@@ -54,8 +53,7 @@ function purchaseItem(){
                     return false;
                 }
             }
-        }
-        
+        } 
     ]).then(function(answer){
         var chosenItem = answer.itemID;
         // console.log(chosenItem);
@@ -64,10 +62,16 @@ function purchaseItem(){
         connection.query("SELECT * FROM products WHERE?", [{item_id: answer.itemID}], function(err, results){
             if (err) throw err;
 
-            var currentInventory = results[0].stock_quantity;
-            console.log("Current inventory level: " + currentInventory);
-            var newInventory = currentInventory - answer.quantity;
-            console.log("New inventory levels after most recent purchase: " + newInventory);
+            var originalInventory = results[0].stock_quantity;
+            var newInventory = originalInventory - answer.quantity;
+                console.log("\nInventory level prior to your purchase:\n" + originalInventory + "\n");
+            if (chosenQuantity > originalInventory) {
+                console.log("Sorry! We don't have enough of that item left to fill your order. Please restart your order and choose a lower quantity to complete purchase.\n")
+                purchaseItem();
+            }
+            else {
+                console.log("New inventory levels after your purchase:\n" + newInventory + "\n");
+            }
         })
     })
 }
