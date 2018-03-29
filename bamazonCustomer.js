@@ -38,16 +38,16 @@ function purchaseItem(){
                     return true;
                 }
                 else {
-                    return false;
+                    console.log("\nPlease choose a valid item ID!");
                 }
             }
         },
         {
-            type: "input",
+            type: "number",
             name: "quantity",
             message: "How many of this item would you like to purchase?",
             validate: function(value) {
-                if(!isNan(value)){
+                if(!isNaN(value)){
                     return true;
                 }
                 else {
@@ -55,7 +55,19 @@ function purchaseItem(){
                 }
             }
         }
+        
     ]).then(function(answer){
-        console.log("Answer: " + answer);
+        var chosenItem = answer.itemID;
+        // console.log(chosenItem);
+        var chosenQuantity = answer.quantity;
+        // console.log(chosenQuantity);
+        connection.query("SELECT * FROM products WHERE?", [{item_id: answer.itemID}], function(err, results){
+            if (err) throw err;
+
+            var currentInventory = results[0].stock_quantity;
+            console.log("Current inventory level: " + currentInventory);
+            var newInventory = currentInventory - answer.quantity;
+            console.log("New inventory levels after most recent purchase: " + newInventory);
+        })
     })
 }
