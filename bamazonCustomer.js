@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "@g5Ms2488",
+    password: "root",
     database: "bamazonDB"
 });
 
@@ -22,7 +22,40 @@ function display(){
           results[i].department_name + "\n" + "Unit Price: $" + results[i].price +
         "\n" + "Current Inventory: " + results[i].stock_quantity + "\n" + "-----------------------");
         }
-    connection.end();
+    purchaseItem();   
     });
+    
+}
 
+function purchaseItem(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "itemID",
+            message: "What is the item ID of the product you would like to purchase?",
+            validate: function(value) {
+                if (!isNaN(value) && value < 11) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        },
+        {
+            type: "input",
+            name: "quantity",
+            message: "How many of this item would you like to purchase?",
+            validate: function(value) {
+                if(!isNan(value)){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+    ]).then(function(answer){
+        console.log("Answer: " + answer);
+    })
 }
