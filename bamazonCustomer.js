@@ -73,9 +73,9 @@ function purchaseItem(){
         } 
     ]).then(function(answer,results){
         var chosenItem = answer.itemID;
-        console.log(chosenItem);
+        // console.log(chosenItem);
         var chosenQuantity = answer.quantity;
-        console.log(chosenQuantity);
+        // console.log(chosenQuantity);
         connection.query("SELECT * FROM products WHERE?", [{item_id: answer.itemID}], function(err, results){
             if (err) {
                 return err
@@ -86,7 +86,7 @@ function purchaseItem(){
                 console.log("\nInventory level prior to your purchase:\n" + originalInventory + "\n");
             if (chosenQuantity < originalInventory) {
                 console.log("New inventory levels after your purchase:\n" + newInventory + "\n");
-                console.log("The total price of your purchase is: \n$" + answer.quantity*itemPrice);
+                console.log("The total price of your purchase is: \n$" + answer.quantity*itemPrice + "\n");
                 connection.query("UPDATE products SET stock_quantity = ? WHERE item_id = ?", [newInventory, answer.itemID],);
                 anotherPurchase();
             }
