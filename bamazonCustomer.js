@@ -76,7 +76,7 @@ function purchaseItem(){
                 console.log("Sorry! We don't have enough of that item left to fill your order. Please restart your order and choose a lower quantity to complete purchase.\n")
             }
 
-            purchaseItem();
+            display();
         })
     })
 }
