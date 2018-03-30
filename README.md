@@ -9,8 +9,8 @@ If said quantity exceeds the item's current inventory, the purchase will be reje
 Once the user places an order successfully, new inventory will be displayed, along with the total cost of the order. After the order is completed, the corresponding MySQL database will be updated to reflect the purchased product's new inventory.
 
 Links to screenshots:
-1. https://github.com/dtcrowley/bamazon/blob/master/MySQL_originalTableBeforeOrder.png
-2. https://github.com/dtcrowley/bamazon/blob/master/node_initialProductDisplay.png
-3. https://github.com/dtcrowley/bamazon/blob/master/node_successfulPurchase.png
-4. https://github.com/dtcrowley/bamazon/blob/master/MySQL_updatedTableAfterOrder.png
-5. https://github.com/dtcrowley/bamazon/blob/master/node_exceedsInventoryError.png
+1. https://github.com/dtcrowley/bamazon/blob/master/Screenshots/MySQL_originalTableBeforeOrder.png
+2. https://github.com/dtcrowley/bamazon/blob/master/Screenshots/node_initialProductDisplay.png
+3. https://github.com/dtcrowley/bamazon/blob/master/Screenshots/node_successfulPurchase.png
+4. https://github.com/dtcrowley/bamazon/blob/master/Screenshots/MySQL_updatedTableAfterOrder.png
+5. https://github.com/dtcrowley/bamazon/blob/master/Screenshots/node_exceedsInventoryError.png
