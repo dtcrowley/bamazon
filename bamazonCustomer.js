@@ -26,6 +26,23 @@ function display(){
     });   
 }
 
+function anotherPurchase(){
+    inquirer.prompt([
+        {
+            type: "confirm",
+            name: "restart",
+            message: "Would you like to make another purchase?"
+        }
+    ]).then(function(answer){
+        if (answer.restart === true){
+            display();
+        }
+        else {
+            connection.end();
+        }
+    })
+}
+
 function purchaseItem(){
     inquirer.prompt([
         {
@@ -61,7 +78,7 @@ function purchaseItem(){
         console.log(chosenQuantity);
         connection.query("SELECT * FROM products WHERE?", [{item_id: answer.itemID}], function(err, results){
             if (err) {
-                console.log(answer.itemID);
+                return err
             }
             var itemPrice = results[0].price;
             var originalInventory = results[0].stock_quantity;
@@ -71,12 +88,12 @@ function purchaseItem(){
                 console.log("New inventory levels after your purchase:\n" + newInventory + "\n");
                 console.log("The total price of your purchase is: \n$" + answer.quantity*itemPrice);
                 connection.query("UPDATE products SET stock_quantity = ? WHERE item_id = ?", [newInventory, answer.itemID],);
+                anotherPurchase();
             }
             else {
                 console.log("Sorry! We don't have enough of that item left to fill your order. Please restart your order and choose a lower quantity to complete purchase.\n")
+                purchaseItem();
             }
-
-            display();
         })
     })
 }
