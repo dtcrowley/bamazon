@@ -7,3 +7,10 @@ The Bamazon app will house product names, their departments, price and current q
 If said quantity exceeds the item's current inventory, the purchase will be rejected and the user will be forced to restart the purchase process.
 
 Once the user places an order successfully, new inventory will be displayed, along with the total cost of the order. After the order is completed, the corresponding MySQL database will be updated to reflect the purchased product's new inventory.
+
+Links to screenshots:
+1. https://github.com/dtcrowley/bamazon/blob/master/MySQL_originalTableBeforeOrder.png
+2. https://github.com/dtcrowley/bamazon/blob/master/node_initialProductDisplay.png
+3. https://github.com/dtcrowley/bamazon/blob/master/node_successfulPurchase.png
+4. https://github.com/dtcrowley/bamazon/blob/master/MySQL_updatedTableAfterOrder.png
+5. https://github.com/dtcrowley/bamazon/blob/master/node_exceedsInventoryError.png
