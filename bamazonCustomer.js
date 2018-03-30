@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "root",
+    password: "@g5Ms2488",
     database: "bamazonDB"
 });
 
@@ -65,14 +65,14 @@ function purchaseItem(){
             var originalInventory = results[0].stock_quantity;
             var newInventory = originalInventory - answer.quantity;
                 console.log("\nInventory level prior to your purchase:\n" + originalInventory + "\n");
-            if (chosenQuantity > originalInventory) {
-                console.log("Sorry! We don't have enough of that item left to fill your order. Please restart your order and choose a lower quantity to complete purchase.\n")
-                purchaseItem();
-            }
-            else {
+            if (chosenQuantity < originalInventory) {
                 console.log("New inventory levels after your purchase:\n" + newInventory + "\n");
                 console.log("The total price of your purchase is: \n$" + answer.quantity*itemPrice);
                 connection.query("UPDATE products SET stock_quantity = ? WHERE item_id = ?", [newInventory, answer.itemID],);
+            }
+            else {
+                console.log("Sorry! We don't have enough of that item left to fill your order. Please restart your order and choose a lower quantity to complete purchase.\n")
+                purchaseItem();
             }
             connection.end();
         })
