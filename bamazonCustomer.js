@@ -84,7 +84,7 @@ function purchaseItem(){
             var originalInventory = results[0].stock_quantity;
             var newInventory = originalInventory - chosenQuantity;
                 console.log("\nInventory level prior to your purchase:\n" + originalInventory + "\n");
-            if (chosenQuantity < originalInventory) {
+            if (chosenQuantity <= originalInventory) {
                 console.log("New inventory levels after your purchase:\n" + newInventory + "\n");
                 console.log("The total price of your purchase is: \n$" + answer.quantity*itemPrice + "\n");
                 connection.query("UPDATE products SET stock_quantity = ? WHERE item_id = ?", [newInventory, answer.itemID],);
